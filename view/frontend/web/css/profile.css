@@ -1,0 +1,236 @@
+/* Horizontal layout */
+.profile-picture-wrapper .profile-picture-layout {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.profile-picture-wrapper .profile-image-upload label {
+    font-weight: 600;
+}
+
+/* Avatar container */
+.profile-picture-wrapper .avatar-upload {
+    padding-top: 20px;
+}
+
+.profile-picture-wrapper .avatar-upload input[type="file"] {
+    display: none;
+}
+
+/* Avatar */
+.profile-picture-wrapper .avatar-preview {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: #f9f9f9;
+    border: 2px dashed #cbd5e0;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.25s ease;
+}
+
+.profile-picture-wrapper .avatar-preview:hover {
+    border-color: #006bb4;
+}
+
+/* Image */
+.profile-picture-wrapper .avatar-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+.profile-picture-wrapper .avatar-preview.has-image img {
+    display: block;
+}
+
+/* Placeholder */
+.profile-picture-wrapper .avatar-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: #888;
+    pointer-events: none;
+}
+
+.profile-picture-wrapper .avatar-preview.has-image .avatar-placeholder {
+    display: none;
+}
+
+/* Hover overlay */
+.profile-picture-wrapper .avatar-actions {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 14px;
+    background: rgba(0, 0, 0, 0.55);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.profile-picture-wrapper .avatar-preview.has-image:hover .avatar-actions {
+    opacity: 1;
+}
+
+/* Change button */
+.profile-picture-wrapper .avatar-change {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 6px;
+}
+
+/* Remove button */
+.profile-picture-wrapper .avatar-remove {
+    background: none;
+    border: none;
+    color: #ffdddd;
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.profile-picture-wrapper .avatar-remove:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* Instructions */
+.profile-picture-wrapper .profile-picture-info {
+    max-width: 420px;
+}
+
+.profile-picture-wrapper .note {
+    font-size: 1.3rem;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+
+/* ================================
+   Profile Picture – Unified Design
+   Scoped to Customer Account Index
+   ================================ */
+
+   .customer-account-index .profile-picture-layout {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+/* Avatar */
+.customer-account-index .avatar-upload input[type="file"] {
+    display: none;
+}
+
+.customer-account-index .avatar-preview {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 2px dashed #cbd5e0;
+    background: #f9f9f9;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.25s ease;
+}
+
+.customer-account-index .avatar-preview:hover {
+    border-color: #006bb4;
+}
+
+.customer-account-index .avatar-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+.customer-account-index .avatar-preview.has-image img {
+    display: block;
+}
+
+.customer-account-index .avatar-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: #888;
+    pointer-events: none;
+}
+
+.customer-account-index .avatar-preview.has-image .avatar-placeholder {
+    display: none;
+}
+
+/* Hover overlay */
+.customer-account-index .avatar-actions {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 14px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.customer-account-index .avatar-preview.has-image:hover .avatar-actions {
+    opacity: 1;
+}
+
+.customer-account-index .avatar-change {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 6px;
+}
+
+.customer-account-index .avatar-remove {
+    background: none;
+    border: none;
+    color: #ffdede;
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.customer-account-index .avatar-remove:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* Instructions */
+.customer-account-index .profile-picture-info {
+    max-width: 420px;
+}
+
+.customer-account-index .profile-picture-info .title {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.customer-account-index .profile-picture-info .note {
+    color: #666;
+    margin-bottom: 6px;
+}

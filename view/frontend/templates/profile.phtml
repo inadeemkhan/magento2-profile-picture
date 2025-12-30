@@ -1,0 +1,118 @@
+<?php /** @var \DevScripts\ProfilePicture\Block\Profile $block */ ?>
+
+<div class="block profile-picture-wrapper">
+    <div class="block-title">
+        <strong><?= $block->escapeHtml(__('Profile Image')) ?></strong>
+    </div>
+
+    <div class="block-content profile-picture-layout">
+
+        <!-- Avatar -->
+        <div class="avatar-upload">
+            <div class="avatar-preview <?= $block->hasCustomPicture() ? 'has-image' : '' ?>" id="avatar-preview">
+                <span class="avatar-placeholder">
+                    <?= $block->escapeHtml(__('Add Photo')) ?>
+                </span>
+
+                <img id="current-profile-img"
+                     src="<?= $block->escapeUrl($block->getProfilePicture()) ?>"
+                     alt="<?= $block->escapeHtmlAttr(__('Profile Photo')) ?>" />
+
+                <?php if ($block->hasCustomPicture()): ?>
+                    <div class="avatar-actions">
+                        <button type="button"
+                                class="avatar-change"
+                                id="change-photo-button">
+                            <?= $block->escapeHtml(__('Change')) ?>
+                        </button>
+
+                        <button type="button"
+                                class="avatar-remove"
+                                id="remove-photo-btn">
+                            <?= $block->escapeHtml(__('Remove')) ?>
+                        </button>
+                    </div>
+                <?php endif; ?>
+            </div>
+
+            <form action="<?= $block->escapeUrl($block->getUrl('profilepicture/index/upload')) ?>"
+                  method="post"
+                  enctype="multipart/form-data"
+                  id="profile-upload-form">
+                <?= $block->getBlockHtml('formkey') ?>
+                <input type="file"
+                       name="profile_picture"
+                       id="profile_picture"
+                       accept="image/jpeg,image/png,image/gif" />
+            </form>
+        </div>
+
+        <!-- Instructions -->
+        <div class="profile-picture-info">
+            <div class="title"><?= $block->escapeHtml(__('Edit Profile Picture')) ?></div>
+
+            <p class="note">
+                <strong><?= __('Formats:') ?></strong> <?= __('JPG, PNG, GIF') ?>
+            </p>
+            <p class="note">
+                <strong><?= __('Maximum Size:') ?></strong> <?= __('2.0 MB') ?>
+            </p>
+
+            <div id="upload-loader" style="display:none; margin-top: 15px;">
+                <span><?= __('Uploading...') ?></span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+require(['jquery', 'Magento_Ui/js/modal/confirm'], function ($, confirm) {
+    'use strict';
+
+    const $fileInput = $('#profile_picture');
+    const $form = $('#profile-upload-form');
+    const $avatar = $('#avatar-preview');
+    const $changeBtn = $('#change-photo-button');
+    const $removeBtn = $('#remove-photo-btn');
+
+    function openFileDialog() {
+        $fileInput.trigger('click');
+    }
+
+    $avatar.on('click', function () {
+        if (!$avatar.hasClass('has-image')) {
+            openFileDialog();
+        }
+    });
+
+    $changeBtn.on('click', function (e) {
+        e.stopPropagation();
+        openFileDialog();
+    });
+
+    $fileInput.on('change', function () {
+        if (!this.files.length) {
+            return;
+        }
+
+        $('#upload-loader').show();
+        $('#current-profile-img').css('opacity', '0.5');
+        $form.submit();
+    });
+
+    $removeBtn.on('click', function (e) {
+        e.stopPropagation();
+
+        confirm({
+            content: '<?= $block->escapeJs(__('Are you sure you want to remove your profile photo?')) ?>',
+            actions: {
+                confirm: function () {
+                    window.location.href =
+                        '<?= $block->escapeUrl($block->getUrl('profilepicture/index/remove')) ?>';
+                }
+            }
+        });
+    });
+});
+</script>
