@@ -1,0 +1,122 @@
+<div class="profile-picture-wrapper">
+    <div class="field profile-image-upload">
+        <label class="label">
+            <span><?= $block->escapeHtml(__('Profile Picture')) ?></span>
+        </label>
+
+        <div class="profile-picture-layout">
+            <!-- Avatar -->
+            <div class="avatar-upload">
+                <div class="avatar-preview" id="avatar-preview">
+                    <span class="avatar-placeholder">
+                        <?= $block->escapeHtml(__('Add Photo')) ?>
+                    </span>
+
+                    <img id="image-preview"
+                         alt="<?= $block->escapeHtmlAttr(__('Profile Picture Preview')) ?>" />
+
+                    <!-- Hover overlay -->
+                    <div class="avatar-actions">
+                        <button type="button"
+                                class="avatar-change"
+                                id="change-photo-button">
+                            <?= $block->escapeHtml(__('Change')) ?>
+                        </button>
+
+                        <button type="button"
+                                class="avatar-remove"
+                                id="remove-photo-button">
+                            <?= $block->escapeHtml(__('Remove')) ?>
+                        </button>
+                    </div>
+                </div>
+
+                <input type="file"
+                       name="profile_picture"
+                       id="profile_picture"
+                       accept="image/jpeg,image/png,image/webp" />
+            </div>
+
+            <!-- Instructions -->
+            <div class="profile-picture-info">
+                <p class="note">
+                    <?= $block->escapeHtml(__('Optional: Upload a profile photo to personalize your account.')) ?>
+                </p>
+
+                <p class="note">
+                    <?= $block->escapeHtml(__('Allowed formats: JPG, PNG, WEBP. Maximum file size: 2 MB.')) ?>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+require(['jquery'], function ($) {
+    'use strict';
+
+    const $fileInput = $('#profile_picture');
+    const $avatar = $('#avatar-preview');
+    const $previewImg = $('#image-preview');
+    const $removeBtn = $('#remove-photo-button');
+    const $changeBtn = $('#change-photo-button');
+
+    const MAX_FILE_SIZE = 2 * 1024 * 1024;
+    const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+
+    // Open file dialog
+    function openFileDialog() {
+        $fileInput.trigger('click');
+    }
+
+    $avatar.on('click', function () {
+        if (!$avatar.hasClass('has-image')) {
+            openFileDialog();
+        }
+    });
+
+    $changeBtn.on('click', function (e) {
+        e.stopPropagation();
+        openFileDialog();
+    });
+
+    $fileInput.on('change', function () {
+        const file = this.files[0];
+        if (!file) {
+            return;
+        }
+
+        if (!ALLOWED_TYPES.includes(file.type)) {
+            alert('Invalid file type. Please upload JPG, PNG, or WEBP images.');
+            resetImage();
+            return;
+        }
+
+        if (file.size > MAX_FILE_SIZE) {
+            alert('Image size must not exceed 2 MB.');
+            resetImage();
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            $previewImg.attr('src', e.target.result);
+            $avatar.addClass('has-image');
+        };
+        reader.readAsDataURL(file);
+    });
+
+    $removeBtn.on('click', function (e) {
+        e.stopPropagation();
+        resetImage();
+    });
+
+    function resetImage() {
+        $fileInput.val('');
+        $previewImg.attr('src', '');
+        $avatar.removeClass('has-image');
+    }
+
+    $('#form-validate').attr('enctype', 'multipart/form-data');
+});
+</script>
