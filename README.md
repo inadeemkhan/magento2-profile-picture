@@ -21,10 +21,10 @@
 
 ## Screenshots  
 
-**Cart Page Indicator**  
+**Customer Account Dashboard**  
 ![Customer Account Dashboard](https://github.com/inadeemkhan/magento2-profile-picture/blob/developer/images/dashboard.png) 
 
-**Configuration Settings**  
+**Customer Account Create**  
 ![Customer Account Create](https://github.com/inadeemkhan/magento2-profile-picture/blob/developer/images/create-account.png)  
 
 ---
